@@ -34,7 +34,6 @@ class GetScores(View):
             if scores.isdigit():
                 if 1 < int(scores) < 10000000: # 此处数字为分数的上下限
                     models.UserScores.objects.update_or_create(uid=uid, defaults={'scores': scores})
-                    print(f'{uid}更新成功')
                     data_status['uid']=uid
                     data_status['scores']=scores
                     return JsonResponse(data_status)
@@ -85,8 +84,6 @@ class SortScores(View):
             data_status['msg']='请输入正确的uid'
             return JsonResponse(data_status)
         if start_num and end_num:
-            print(start_num)
-            print(end_num)
             if start_num.isdigit() and end_num.isdigit():
                 if int(start_num)>int(end_num):
                     data_status['status_code'] = 2004
